@@ -1,0 +1,1016 @@
+[
+  {
+    "id": "latest-sense:present2:5",
+    "meaning": "礼物",
+    "tags": [
+      "[C]",
+      "难度 A2"
+    ],
+    "exam": "高考4",
+    "examples": [
+      {
+        "en": "What can I get him for a birthday present?",
+        "zh": "我给他送点什么生日礼物呢？",
+        "sources": [
+          "牛津词典"
+        ],
+        "topic": ""
+      },
+      {
+        "en": "Interestingly, the letters did not contain the usual warnings to children that they might not receive their presents if they were not good.",
+        "zh": "值得关注的是，信里并没有那些常见的对孩子的警告，比如表现不好就可能得不到礼物之类的话。",
+        "sources": [
+          "新外研 · 必修二 · UNIT 2 · Understanding Ideas"
+        ],
+        "topic": "节日习俗"
+      },
+      {
+        "en": "When Jerry's grandchildren turned 13, his present to each of them was three jars: one for Spending, one for Saving, and another for Giving - he has since added a fourth jar for Investing.",
+        "zh": "杰里的孙辈们年满13岁时，他送给每个人的礼物是三个罐子：一个用于消费，一个用于储蓄，另一个用于捐赠——后来他又添了第四个罐子用于投资。",
+        "sources": [
+          "新外研 · 选择性必修二 · UNIT 2 · Developing Ideas"
+        ],
+        "topic": "经济生活"
+      },
+      {
+        "en": "Jerry's birthday present to his grandchildren is, however, much more than money and a few jars - he is giving them the opportunity to learn lifelong values.",
+        "zh": "然而，杰里送给孙辈的生日礼物远不止金钱和几个罐子——他给他们的是学习受用一生价值观的机会。",
+        "sources": [
+          "新外研 · 选择性必修二 · UNIT 2 · Developing Ideas"
+        ],
+        "topic": "经济生活"
+      },
+      {
+        "en": "When I wrote a letter to Father Christmas telling him about the presents I wanted, Granny made an effort to help me.",
+        "zh": "当我写信给圣诞老人，告诉他我想要的礼物时，奶奶尽力帮助我。",
+        "sources": [
+          "新北师 · 必修一 · UNIT 3 · Lesson 3"
+        ],
+        "topic": "节日习俗"
+      },
+      {
+        "en": "My stocking was full of small toys and sweets on Christmas morning, and there were presents under the tree.",
+        "zh": "圣诞节早上，我的袜子里装满了小玩具和糖果，而且树下有礼物。",
+        "sources": [
+          "新北师 · 必修一 · UNIT 3 · Lesson 3"
+        ],
+        "topic": "节日习俗"
+      },
+      {
+        "en": "I was on my best behaviour as we opened the presents.",
+        "zh": "拆礼物时，我表现得特别好。",
+        "sources": [
+          "新北师 · 必修一 · UNIT 3 · Lesson 3"
+        ],
+        "topic": "节日习俗"
+      },
+      {
+        "en": "I'd love to, but I have to go downtown to get Kevin a birthday present.",
+        "zh": "我很想去，但我得进城给凯文买一份生日礼物。",
+        "sources": [
+          "2026年 · 全国二卷 · 听力 · Text 1"
+        ],
+        "topic": "人际交往"
+      },
+      {
+        "en": "What does Kathy thank Dave for?\nB. Sending her a present.",
+        "zh": "凯茜感谢戴夫什么？\nB. 给她寄了一份礼物。",
+        "sources": [
+          "2024年 · 新课标I卷 · 听力 · Text 7 · 题目选项"
+        ],
+        "topic": "家庭社区"
+      },
+      {
+        "en": "What are the speakers talking about?A. Writing a book.B. Holding a celebration.C. Buying a present.",
+        "zh": "谈话者在谈论什么？A. 写一本书。B. 举办一场庆祝活动。C. 买一份礼物。",
+        "sources": [
+          "2023年 · 新课标I&II卷 · 听力 · Text 5 · 题目选项"
+        ],
+        "topic": "人际交往"
+      },
+      {
+        "en": "As the children got older, they would give Santa some hints (提示) on where to buy their presents.",
+        "zh": "随着孩子们长大，他们会给圣诞老人一些提示，告诉他在哪里能买到他们想要的礼物。",
+        "sources": [
+          "2022年 · 6月浙江卷 · 七选五"
+        ],
+        "topic": "节日习俗"
+      }
+    ],
+    "pos": "n.",
+    "originalTags": [
+      {
+        "text": "[C]",
+        "field": "usage",
+        "help": "标签说明：[C]"
+      },
+      {
+        "text": "难度 A2",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：A2。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "近gift",
+        "help": ""
+      },
+      {
+        "text": "高考4",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "1",
+    "frequency": "high",
+    "numberHelp": "第1义，高义频，高考4次",
+    "precisePos": "n."
+  },
+  {
+    "id": "latest-sense:present1:2",
+    "meaning": "目前；现在",
+    "tags": [
+      "[the present]",
+      "难度 B1"
+    ],
+    "exam": "高考0",
+    "examples": [
+      {
+        "en": "I've decided to live in the present and not spend my life regretting the past or dreading the future.",
+        "zh": "我决定活在当下，不再浪费生命悔恨过去或担忧未来。",
+        "sources": [],
+        "topic": ""
+      },
+      {
+        "en": "Written Chinese has also become an important means by which China's present is connected with its past.",
+        "zh": "汉字也成为连接中国现在与过去的一个重要媒介。",
+        "sources": [
+          "新人教 · 必修一 · UNIT 5 · Reading and Thinking"
+        ],
+        "topic": "语言学习"
+      },
+      {
+        "en": "If you keep your eyes open, you will be surprised to find that you can see both its past and its present.",
+        "zh": "如果你留心观察，你会惊讶地发现，你能同时看到它的过去和现在。",
+        "sources": [
+          "新人教 · 必修二 · UNIT 4 · Reading and Thinking"
+        ],
+        "topic": "历史文化"
+      },
+      {
+        "en": "The greatest attention at present is on Mars because it is closer to Earth.",
+        "zh": "目前最受关注的是火星，因为它离地球更近。",
+        "sources": [
+          "新人教 · 必修三 · UNIT 4 · Reading for Writing"
+        ],
+        "topic": "科学技术"
+      },
+      {
+        "en": "It suggests that the present day is a new age for inventions, but many people might think that the great age of invention is over.",
+        "zh": "它暗示当今是一个发明的新时代，但许多人可能认为发明的伟大时代已经结束。",
+        "sources": [
+          "新外研 · 必修三 · UNIT 3 · Understanding Ideas"
+        ],
+        "topic": "科学技术"
+      },
+      {
+        "en": "He continued: “Never have I viewed my ugliness as at the present moment.”",
+        "zh": "他接着说道：“我从来没像现在这般明白自己的丑陋。”",
+        "sources": [
+          "新外研 · 选择性必修三 · UNIT 1 · Developing Ideas"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "Meanwhile, the rise and fall of this civilisation must also leave us thinking about our own past, present and future.",
+        "zh": "同时，玛雅文明的崛起与衰落必定也让我们思考自己的过去、现在与将来。",
+        "sources": [
+          "新外研 · 选择性必修四 · UNIT 5 · Understanding Ideas"
+        ],
+        "topic": "历史文化"
+      },
+      {
+        "en": "At present it is expected to generate £240m for the year ending in April 2019, which will go to school sports.",
+        "zh": "目前，预计该税种在截至2019年4月的这一年里将带来2.4亿英镑收入，这笔钱将用于学校体育。",
+        "sources": [
+          "2022年 · 全国乙卷 · 阅读 · D篇"
+        ],
+        "topic": "经济生活"
+      },
+      {
+        "en": "At present, the airport handles 110 flights a day.",
+        "zh": "目前，该机场每天完成飞机起降 110 架次。",
+        "sources": [],
+        "topic": ""
+      },
+      {
+        "en": "The company is still in business, at least for the present.",
+        "zh": "这家公司仍在运营，至少目前如此。",
+        "sources": [],
+        "topic": ""
+      }
+    ],
+    "pos": "n.",
+    "originalTags": [
+      {
+        "text": "[the present]",
+        "field": "usage",
+        "help": "标签说明：[the present]"
+      },
+      {
+        "text": "难度 B1",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：B1。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考0",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "2",
+    "frequency": "low",
+    "numberHelp": "第2义，低义频，高考0次",
+    "precisePos": "n."
+  },
+  {
+    "id": "latest-sense:present1:4",
+    "meaning": "在场的",
+    "tags": [
+      "[不用于名词前]",
+      "难度 B1"
+    ],
+    "exam": "高考0",
+    "examples": [
+      {
+        "en": "All students are required to be present at the school meeting.",
+        "zh": "所有学生务必出席全校大会。",
+        "sources": [],
+        "topic": ""
+      },
+      {
+        "en": "Everybody present welcomed the decision.",
+        "zh": "在场的所有人都对这个决定表示欢迎。",
+        "sources": [],
+        "topic": ""
+      },
+      {
+        "en": "These external influences are always present, but there are certainly ways to deal with them.",
+        "zh": "这些外部影响始终存在，不过我们当然也有办法应对它们。",
+        "sources": [
+          "新译林 · 必修一 · UNIT 4 · Extended Reading"
+        ],
+        "topic": "个人成长"
+      },
+      {
+        "en": "Much of this lifestyle centers around being outside and knowing the ins and outs of the town; being present and mindful of your surroundings is a critical part of the culture.",
+        "zh": "这种生活方式很大程度上围绕“走到户外、熟悉小镇的里里外外”展开；专注于当下、留意身边的环境是这种文化的重要组成部分。",
+        "sources": [
+          "2026年 · 全国一卷 · 完形填空"
+        ],
+        "topic": "家庭社区"
+      },
+      {
+        "en": "This is a very old habit that's been present in all kinds of predators (食肉动物).",
+        "zh": "这是一个非常古老的习惯，存在于各类食肉动物之中。",
+        "sources": [
+          "2024年 · 全国甲卷 · 阅读 · B篇"
+        ],
+        "topic": "自然生态"
+      },
+      {
+        "en": "This research overturns the popular view that all human speech sounds were present when human beings evolved around 300,000 years ago.",
+        "zh": "这项研究推翻了一个流行观点：约30万年前人类进化时，所有人类语音就已存在。",
+        "sources": [
+          "2022年 · 全国新高考I卷 · 阅读 · D篇"
+        ],
+        "topic": "科学技术"
+      },
+      {
+        "en": "Foreign observers were present at the elections.",
+        "zh": "外国观察员出席了选举。",
+        "sources": [],
+        "topic": ""
+      }
+    ],
+    "pos": "adj.",
+    "originalTags": [
+      {
+        "text": "[不用于名词前]",
+        "field": "usage",
+        "help": "标签说明：[不用于名词前]"
+      },
+      {
+        "text": "难度 B1",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：B1。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考0",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "1",
+    "frequency": "low",
+    "numberHelp": "第1义，低义频，高考0次",
+    "precisePos": "adj."
+  },
+  {
+    "id": "latest-sense:present1:3",
+    "meaning": "目前的；现在的",
+    "tags": [
+      "[只用于名词前]",
+      "难度 A2"
+    ],
+    "exam": "高考0",
+    "examples": [
+      {
+        "en": "I am not satisfied with the present situation.",
+        "zh": "我对现在的状况不满意。",
+        "sources": [
+          "牛津词典"
+        ],
+        "topic": ""
+      },
+      {
+        "en": "It is commonly believed that the city described in the painting is Bianjing (present-day Kaifeng), the capital of the Northern Song Dynasty.",
+        "zh": "人们通常认为，画中描绘的城市是汴京（即今天的开封），北宋的都城。",
+        "sources": [
+          "新译林 · 选择性必修一 · UNIT 3 · Extended Reading"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "The starting point of the corridor and the entire Silk Road network is Chang'an (present-day Xi'an), in Shaanxi Province of north-west China.",
+        "zh": "这条廊道以及整个丝绸之路网络的起点是中国西北陕西省的长安（即今天的西安）。",
+        "sources": [
+          "新译林 · 选择性必修三 · UNIT 4 · Extended Reading"
+        ],
+        "topic": "历史文化"
+      },
+      {
+        "en": "As present-day advertisers often have large budgets, huge amounts of money are spent on applying modern design techniques to make these advertisements as visually attractive as possible.",
+        "zh": "由于当今的广告商往往预算充足，大笔资金被用于运用现代设计手法，使广告尽可能在视觉上吸引人。",
+        "sources": [
+          "新北师 · 选择性必修二 · UNIT 6 · Lesson 3"
+        ],
+        "topic": "经济生活"
+      },
+      {
+        "en": "And they offered me 6% more than my present salary.",
+        "zh": "而且他们给我的薪水比我现在的高 6%。",
+        "sources": [
+          "2025年 · 全国二卷 · 听力 · Text 9"
+        ],
+        "topic": "工作与职业"
+      },
+      {
+        "en": "I am not satisfied with the present situation.",
+        "zh": "我对目前的状况不满意。",
+        "sources": [],
+        "topic": ""
+      }
+    ],
+    "pos": "adj.",
+    "originalTags": [
+      {
+        "text": "[只用于名词前]",
+        "field": "usage",
+        "help": "标签说明：[只用于名词前]"
+      },
+      {
+        "text": "难度 A2",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：A2。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考0",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "2",
+    "frequency": "low",
+    "numberHelp": "第2义，低义频，高考0次",
+    "precisePos": "adj."
+  },
+  {
+    "id": "latest-sense:present2:7",
+    "meaning": "呈现；展示",
+    "tags": [
+      "vt",
+      "难度 C2"
+    ],
+    "exam": "高考8",
+    "examples": [
+      {
+        "en": "Classic works, written by masters, present great thoughts through fascinating stories andlanguage.",
+        "zh": "大师们所著的经典作品，通过极具吸引力的故事和语言呈现出伟大的思想。",
+        "sources": [
+          "2014 浙江书面表达"
+        ],
+        "topic": ""
+      },
+      {
+        "en": "The Richfield Museum of Fine Art is proud to present our new exhibition, “From Shang to Qing: Chinese Art Through the Ages.”",
+        "zh": "里奇菲尔德艺术博物馆隆重推出我们的新展——“从商朝到清朝：中国历代艺术”。",
+        "sources": [
+          "新人教 · 选择性必修三 · UNIT 1 · Using Language"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "Day after day, Han Gan painted the horses, his brush presenting every detail that he saw with his own eyes.",
+        "zh": "韩干日复一日地练习画马，用画笔把眼睛观察到的每一处细节都呈现出来。",
+        "sources": [
+          "新外研 · 必修三 · UNIT 4 · Developing Ideas"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "From Barcelona's forest-like Sagrada Familia to the modern style of Beijing's Water Cube, nature is presented in various architectural designs.",
+        "zh": "从巴塞罗那如森林般的圣家族大教堂到现代风格的北京水立方，自然在各种建筑设计中得到呈现。",
+        "sources": [
+          "新外研 · 选择性必修三 · UNIT 5 · Understanding Ideas"
+        ],
+        "topic": "科学技术"
+      },
+      {
+        "en": "However, the image Jade presents to obtain the praise of others is false.",
+        "zh": "然而，杰德为博取他人赞美而呈现出的形象是虚假的。",
+        "sources": [
+          "新外研 · 选择性必修三 · UNIT 1 · Understanding Ideas"
+        ],
+        "topic": "个人成长"
+      },
+      {
+        "en": "It plays a part in the image we present to the world, and making an effort with your appearance can leave a positive first impression on others and boost your confidence.",
+        "zh": "它在我们向世界展示的形象中起着作用，在外表上花些心思能给他人留下良好的第一印象，并增强你的自信。",
+        "sources": [
+          "新外研 · 选择性必修三 · UNIT 1 · Understanding Ideas"
+        ],
+        "topic": "个人成长"
+      },
+      {
+        "en": "The first section presents a peaceful scene of rural life near Bianjing, featuring crop fields, a river winding through the landscape, and farmers hard at work.",
+        "zh": "画卷的第一部分展现了汴京近郊恬静的乡村生活：农田、蜿蜒流过田野的河流，以及辛勤劳作的农民。",
+        "sources": [
+          "新译林 · 选择性必修一 · UNIT 3 · Extended Reading"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "Journalists may choose to present the minimum, the maximum or something in between in their news reports.",
+        "zh": "记者可能会选择在他们的新闻报道中呈现数据的最小值、最大值或中间的某个数值。",
+        "sources": [
+          "新译林 · 选择性必修二 · UNIT 1 · Reading"
+        ],
+        "topic": "语言学习"
+      },
+      {
+        "en": "Though journalists are committed to presenting the truth, it is better to use our own judgement than rely entirely on news reports.",
+        "zh": "尽管记者致力于呈现真相，我们最好还是运用自己的判断力，而非完全依赖新闻报道。",
+        "sources": [
+          "新译林 · 选择性必修二 · UNIT 1 · Reading"
+        ],
+        "topic": "语言学习"
+      },
+      {
+        "en": "Keep at it until you can concisely and confidently present your best self.",
+        "zh": "熟能生巧，坚持练习，直到你能够简洁而自信地展现出最好的自我。",
+        "sources": [
+          "新译林 · 选择性必修四 · UNIT 3 · Extended Reading"
+        ],
+        "topic": "工作与职业"
+      },
+      {
+        "en": "The City of Burlington public art program is presenting a series of temporary public art signs at the Beachway in conjunction with the Ontario Culture Days.",
+        "zh": "伯灵顿市公共艺术项目正与安大略文化日合作，在 Beachway 推出一系列临时公共艺术标牌。",
+        "sources": [
+          "2026年 · 1月浙江卷 · 阅读 · A篇"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "This call is open to Burlington-based artists and is open to all art forms that can be presented in a sign format.",
+        "zh": "本次征集面向伯灵顿本地艺术家，凡能以标牌形式呈现的艺术形式均可参与。",
+        "sources": [
+          "2026年 · 1月浙江卷 · 阅读 · A篇"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "The reviews were presented to 400 subjects.",
+        "zh": "这些评论被呈现给 400 名受试者。",
+        "sources": [
+          "2026年 · 1月浙江卷 · 阅读 · C篇"
+        ],
+        "topic": "经济生活"
+      },
+      {
+        "en": "We hope to present the rather abstract Go game and AI in a visual context, and initiate dialogues with minimalist art, conceptual art and expressionism.",
+        "zh": "我们希望在一个视觉语境中呈现相当抽象的围棋与人工智能，并与极简主义艺术、观念艺术和表现主义展开对话。",
+        "sources": [
+          "2025年 · 全国一卷 · 语法填空"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "Far from it, and I’ve got to present it in class tomorrow.",
+        "zh": "还差得远呢，而且我明天还得在班上做展示。",
+        "sources": [
+          "2024年 · 1月浙江卷 · 听力 · Text 5"
+        ],
+        "topic": "学校生活"
+      },
+      {
+        "en": "If you want to be published, it's vital to submit a perfect, professionally presented manuscript (原稿).",
+        "zh": "如果你想（作品）得以发表，提交一份完美、排版专业的原稿至关重要。",
+        "sources": [
+          "2024年 · 新课标I卷 · 七选五"
+        ],
+        "topic": "语言学习"
+      },
+      {
+        "en": "The project required each team to develop a hypothesis (假说), set up an experiment to test the hypothesis, do the statistical analysis and present the findings.",
+        "zh": "该项目要求每个团队提出假说、设计实验验证假说、进行统计分析，并展示研究结果。",
+        "sources": [
+          "2022年 · 1月浙江卷 · 读后续写"
+        ],
+        "topic": "学校生活"
+      },
+      {
+        "en": "Scottish National Portrait (肖像画) Gallery presents a series of lectures for the general public.",
+        "zh": "苏格兰国家肖像画廊面向公众举办一系列讲座。",
+        "sources": [
+          "2022年 · 全国乙卷 · 阅读 · A篇"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "You need to present yourself better.",
+        "zh": "你需要更善于展示自己。",
+        "sources": [],
+        "topic": ""
+      }
+    ],
+    "pos": "v.",
+    "originalTags": [
+      {
+        "text": "vt",
+        "field": "usage",
+        "help": "标签说明：vt"
+      },
+      {
+        "text": "难度 C2",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：C2。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考8",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "1",
+    "frequency": "high",
+    "numberHelp": "第1义，高义频，高考8次",
+    "precisePos": "vt."
+  },
+  {
+    "id": "latest-sense:present2:11",
+    "meaning": "上演；播出",
+    "tags": [
+      "vt",
+      "难度 C1"
+    ],
+    "exam": "高考2",
+    "examples": [
+      {
+        "en": "The theater company presents a new production of King Lear.",
+        "zh": "剧团推出全新制作的《李尔王》。",
+        "sources": [],
+        "topic": ""
+      },
+      {
+        "en": "When Beethoven presented Symphony No. 9 in Vienna in 1824, it was his first time on stage in over ten years.",
+        "zh": "1824年贝多芬在维也纳首演《第九交响曲》时，是他十多年来第一次登台。",
+        "sources": [
+          "新译林 · 选择性必修一 · UNIT 2 · Extended Reading"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "It presents live entertainment, including pop, rock, folk, jazz, musicals, dance, world music, films and classical music.",
+        "zh": "它上演（推出）现场娱乐演出，包括流行乐、摇滚、民谣、爵士乐、音乐剧、舞蹈、世界音乐、电影和古典音乐。",
+        "sources": [
+          "2022年 · 全国甲卷 · 阅读 · A篇"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "Presenting the best of the West End along with the pick of the UK's touring shows, the New Theatre is Cardiff's oldest surviving traditional theatre.",
+        "zh": "新剧院上演伦敦西区的精品剧目以及英国巡演节目中的精选之作，是加的夫现存最古老的传统剧院。",
+        "sources": [
+          "2022年 · 全国甲卷 · 阅读 · A篇"
+        ],
+        "topic": "文学艺术"
+      }
+    ],
+    "pos": "v.",
+    "originalTags": [
+      {
+        "text": "vt",
+        "field": "usage",
+        "help": "标签说明：vt"
+      },
+      {
+        "text": "难度 C1",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：C1。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考2",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "2",
+    "frequency": "high",
+    "numberHelp": "第2义，高义频，高考2次",
+    "precisePos": "vt."
+  },
+  {
+    "id": "latest-sense:present2:13",
+    "meaning": "介绍；引见",
+    "tags": [
+      "vt",
+      "[正式]",
+      "难度 C2"
+    ],
+    "exam": "高考2",
+    "examples": [
+      {
+        "en": "Later on I'd like to present you to the headteacher.",
+        "zh": "稍后我会把你介绍给校长。",
+        "sources": [],
+        "topic": ""
+      },
+      {
+        "en": "Why does the speaker give the talk?A. To present a guest.B. To sell a book.C. To share a story.",
+        "zh": "讲话者为什么做这次演讲？A. 为了介绍一位嘉宾。B. 为了卖一本书。C. 为了分享一个故事。",
+        "sources": [
+          "2026年 · 1月浙江卷 · 听力 · Text 10"
+        ],
+        "topic": "文学艺术"
+      },
+      {
+        "en": "What is Jennifer Green doing?A. Conducting a class. B. Presenting a speaker. C. Recommending a book.",
+        "zh": "珍妮弗·格林在做什么？A. 上课。B. 介绍一位演讲者。C. 推荐一本书。",
+        "sources": [
+          "2022年 · 1月浙江卷 · 听力 · Text 10 · 题目选项"
+        ],
+        "topic": "文学艺术"
+      }
+    ],
+    "pos": "v.",
+    "originalTags": [
+      {
+        "text": "vt",
+        "field": "usage",
+        "help": "标签说明：vt"
+      },
+      {
+        "text": "[正式]",
+        "field": "usage",
+        "help": "标签说明：[正式]"
+      },
+      {
+        "text": "难度 C2",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：C2。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考2",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "3",
+    "frequency": "high",
+    "numberHelp": "第3义，高义频，高考2次",
+    "precisePos": "vt."
+  },
+  {
+    "id": "latest-sense:present2:6",
+    "meaning": "颁发；授予；赠送",
+    "tags": [
+      "vt",
+      "难度 B2"
+    ],
+    "exam": "高考1",
+    "examples": [
+      {
+        "en": "The Grammy Awards are presented every year in the music industry in the United States.",
+        "zh": "格莱美奖在美国音乐界每年颁奖一次。",
+        "sources": [
+          "外研6-4"
+        ],
+        "topic": ""
+      },
+      {
+        "en": "Therefore, in order to please them, foreign envoys presented these emperors with the most intricate and splendid timepieces.",
+        "zh": "因此，为了取悦这些皇帝，外国使节向他们进献了最精致、最华丽的钟表。",
+        "sources": [
+          "新外研 · 选择性必修三 · UNIT 2 · Developing Ideas"
+        ],
+        "topic": "历史文化"
+      },
+      {
+        "en": "Presented with two job offers, for instance, we may wonder exactly what it is we're choosing between.",
+        "zh": "比如，同时被给予两份工作机会时，我们可能会想自己到底在两者之间选择什么。",
+        "sources": [
+          "新外研 · 选择性必修四 · UNIT 1 · Developing Ideas"
+        ],
+        "topic": "工作与职业"
+      },
+      {
+        "en": "They had this little ceremony, where they presented him with a Purple Heart and a watch.",
+        "zh": "他们为他举行了一个小小的仪式，授予他一枚紫心勋章和一块手表。",
+        "sources": [
+          "新北师 · 选择性必修四 · UNIT 11 · Lesson 3"
+        ],
+        "topic": "历史文化"
+      },
+      {
+        "en": "In a recent experiment, cockatoos were presented with a box with a nut inside it.",
+        "zh": "在最近的一项实验中，凤头鹦鹉得到了一个里面装着一颗坚果的盒子。",
+        "sources": [
+          "2022年 · 全国甲卷 · 阅读 · B篇"
+        ],
+        "topic": "科学技术"
+      },
+      {
+        "en": "Last year she was presented with an award for lifetime achievement.",
+        "zh": "去年，她获得了终身成就奖。",
+        "sources": [],
+        "topic": ""
+      }
+    ],
+    "pos": "v.",
+    "originalTags": [
+      {
+        "text": "vt",
+        "field": "usage",
+        "help": "标签说明：vt"
+      },
+      {
+        "text": "难度 B2",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：B2。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考1",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "4",
+    "frequency": "low",
+    "numberHelp": "第4义，低义频，高考1次",
+    "precisePos": "vt."
+  },
+  {
+    "id": "latest-sense:present2:9",
+    "meaning": "出示；提交",
+    "tags": [
+      "vt",
+      "难度 B2"
+    ],
+    "exam": "高考1",
+    "examples": [
+      {
+        "en": "At the end of the programme, the students presented papers on their research.",
+        "zh": "项目结束时，学生提交了他们的研究论文。",
+        "sources": [],
+        "topic": ""
+      },
+      {
+        "en": "Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts.",
+        "zh": "写作对我来说既困难又痛苦，以至于老师允许我以表演戏剧的方式提交我那篇关于泰坦尼克号沉没的论文，剧中所有角色都由我一人扮演。",
+        "sources": [
+          "2023年 · 新课标I&II卷 · 读后续写"
+        ],
+        "topic": "学校生活"
+      },
+      {
+        "en": "You must present your passport to the customs officer.",
+        "zh": "你必须向海关人员出示护照。",
+        "sources": [],
+        "topic": ""
+      }
+    ],
+    "pos": "v.",
+    "originalTags": [
+      {
+        "text": "vt",
+        "field": "usage",
+        "help": "标签说明：vt"
+      },
+      {
+        "text": "难度 B2",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：B2。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考1",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "5",
+    "frequency": "low",
+    "numberHelp": "第5义，低义频，高考1次",
+    "precisePos": "vt."
+  },
+  {
+    "id": "latest-sense:present2:8",
+    "meaning": "提出（观点、计划等）",
+    "tags": [
+      "vt",
+      "难度 C2"
+    ],
+    "exam": "高考0",
+    "examples": [
+      {
+        "en": "We presented three options to the Students' Union for discussion.",
+        "zh": "我们向学生会提出了三种选择以供讨论。",
+        "sources": [],
+        "topic": ""
+      },
+      {
+        "en": "Like Zhang, they present their ideas in the hope of getting investment and advice, and they have the same passion and devotion.",
+        "zh": "和张越一样，他们提出自己的想法，希望能获得投资和建议，他们有着同样的热情与投入。",
+        "sources": [
+          "新外研 · 选择性必修四 · UNIT 4 · Understanding Ideas"
+        ],
+        "topic": "工作与职业"
+      },
+      {
+        "en": "Honoured guests, teachers and students, it is my pleasure and privilege to welcome you here today and present my thoughts on this special occasion.",
+        "zh": "尊敬的各位来宾、老师们、同学们，今天我很荣幸也很有幸在此欢迎大家，并在这一特殊场合陈述我的想法。",
+        "sources": [
+          "新译林 · 选择性必修四 · UNIT 1 · Extended Reading"
+        ],
+        "topic": "学校生活"
+      },
+      {
+        "en": "In 1885, Hermann Ebbinghaus published a book called Memory and presented a famous forgetting curve.",
+        "zh": "1885年，赫尔曼·艾宾浩斯出版了《记忆》一书，并提出了著名的遗忘曲线。",
+        "sources": [
+          "新北师 · 必修三 · UNIT 9 · Lesson 3"
+        ],
+        "topic": "科学技术"
+      }
+    ],
+    "pos": "v.",
+    "originalTags": [
+      {
+        "text": "vt",
+        "field": "usage",
+        "help": "标签说明：vt"
+      },
+      {
+        "text": "难度 C2",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：C2。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考0",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "6",
+    "frequency": "low",
+    "numberHelp": "第6义，低义频，高考0次",
+    "precisePos": "vt."
+  },
+  {
+    "id": "latest-sense:present2:10",
+    "meaning": "引起；招致",
+    "tags": [
+      "vt",
+      "难度 C2"
+    ],
+    "exam": "高考0",
+    "examples": [
+      {
+        "en": "The EXIT signs could not be seen clearly, which presented potential safety issues.",
+        "zh": "“出口”指示牌看不清楚会带来安全隐患。",
+        "sources": [],
+        "topic": ""
+      },
+      {
+        "en": "In locations such as this, the thin air, changeable weather and high levels of UV radiation presented perhaps the greatest challenge for railway workers.",
+        "zh": "在这样的地方，稀薄的空气、多变的天气和强烈的紫外线，也许给铁路工人带来了最大的挑战。",
+        "sources": [
+          "新外研 · 选择性必修一 · UNIT 6 · Understanding Ideas"
+        ],
+        "topic": "科学技术"
+      },
+      {
+        "en": "Large classes present great problems to many teachers.",
+        "zh": "大班教学给许多老师造成很大困难。",
+        "sources": [],
+        "topic": ""
+      }
+    ],
+    "pos": "v.",
+    "originalTags": [
+      {
+        "text": "vt",
+        "field": "usage",
+        "help": "标签说明：vt"
+      },
+      {
+        "text": "难度 C2",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：C2。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考0",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "7",
+    "frequency": "low",
+    "numberHelp": "第7义，低义频，高考0次",
+    "precisePos": "vt."
+  },
+  {
+    "id": "latest-sense:present2:12",
+    "meaning": "主持",
+    "tags": [
+      "vt",
+      "难度 B2"
+    ],
+    "exam": "高考0",
+    "examples": [
+      {
+        "en": "She used to present a gardening programme on TV.",
+        "zh": "她曾在电视上主持一个园艺节目。",
+        "sources": [
+          "牛津词典"
+        ],
+        "topic": ""
+      }
+    ],
+    "pos": "v.",
+    "originalTags": [
+      {
+        "text": "vt",
+        "field": "usage",
+        "help": "标签说明：vt"
+      },
+      {
+        "text": "难度 B2",
+        "field": "difficulty",
+        "help": "该释义的 CEFR 语言难度等级：B2。"
+      }
+    ],
+    "relations": [
+      {
+        "text": "高考0",
+        "field": "exam-count",
+        "help": ""
+      }
+    ],
+    "number": "8",
+    "frequency": "low",
+    "numberHelp": "第8义，低义频，高考0次",
+    "precisePos": "vt."
+  }
+]
