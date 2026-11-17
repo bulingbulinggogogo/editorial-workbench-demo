@@ -1,0 +1,32 @@
+const {JSDOM}=require('jsdom');
+const fs=require('fs'),assert=require('node:assert/strict');
+(async()=>{
+const dom=new JSDOM('<!doctype html><body><dialog id="dialog"></dialog><div id="table"></div></body>',{url:'https://test.invalid',runScripts:'outside-only',pretendToBeVisual:true});
+const w=dom.window;
+w.matchMedia=()=>({matches:false,addListener(){},removeListener(){},addEventListener(){},removeEventListener(){}});
+w.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
+w.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open')};
+const nativeStyle=w.getComputedStyle.bind(w);w.getComputedStyle=el=>nativeStyle(el);
+w.eval(fs.readFileSync('assets/book-ui.js','utf8'));
+const host=w.document.querySelector('#table');
+w.BookUI.renderTable(host,[{id:'a',name:'训练一',kind:'套题'}]);
+assert.ok(host.querySelector('.ant-table'));assert.ok(host.querySelector('.ant-tag'));
+assert.equal(host.querySelectorAll('thead th').length,0);
+assert.equal(host.querySelector('[data-content-row]').dataset.contentRow,'a');
+assert.ok(host.querySelector('.content-drag-handle').draggable);
+assert.equal(host.querySelector('[data-delete-content]').dataset.deleteContent,'a');
+assert.equal(host.querySelectorAll('[title]').length,0);
+// The inline row can be inserted then removed by a fresh render without DOM errors.
+host.querySelector('tbody').insertAdjacentHTML('afterbegin','<tr><td><input id="draft"></td><td>保存</td></tr>');
+w.BookUI.renderTable(host,[]);assert.equal(host.querySelector('#draft'),null);
+assert.ok(host.querySelector('.directory-content-empty').closest('tr'));
+w.BookUI.openDialog('删除听力套题','<fieldset><label><input name="mode" type="radio" checked>仅删除套题</label><label><input name="mode" type="radio">同时删除试题</label></fieldset>','<button data-close>取消</button><button id="next">下一步</button>');
+assert.ok(w.document.querySelector('.ant-modal'));
+assert.equal(w.document.querySelectorAll('[name="mode"]').length,2);
+w.BookUI.openDialog('确认试题删除影响','<div class="suite-impact"><input id="confirmation"></div>','<button id="final" disabled>确认删除</button>');
+assert.equal(w.document.querySelectorAll('[name="mode"]').length,0);
+assert.ok(w.document.querySelector('#final').disabled);
+w.BookUI.closeDialog();assert.equal(w.document.querySelector('.ant-modal'),null);
+w.BookUI.disposeTable();dom.window.close();
+console.log('PASS: real Ant Design Table/Tag/Modal mount, action attributes, inline row replacement, second modal and close');
+})().catch(e=>{console.error(e);process.exit(1)});

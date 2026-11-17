@@ -1,0 +1,37 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const {JSDOM}=require('jsdom');
+const html=fs.readFileSync('index.html','utf8');
+const dom=new JSDOM(html.replace(/<script[^>]*>[\s\S]*?<\/script>/g,''),{url:'https://test.invalid',runScripts:'outside-only',pretendToBeVisual:true});
+const w=dom.window;w.structuredClone=structuredClone;w.matchMedia=()=>({matches:false,addListener(){},removeListener(){},addEventListener(){},removeEventListener(){}});w.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};w.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open')};w.HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','')};const nativeStyle=w.getComputedStyle.bind(w);w.getComputedStyle=el=>nativeStyle(el);
+w.HTMLMediaElement.prototype.pause=function(){};
+const ctx=dom.getInternalVMContext();
+vm.runInContext(html.match(/<script>([\s\S]*?)<\/script>/)[1],ctx);
+for(const match of html.matchAll(/<script src="([^"]+)"/g))if(match[1]!=='app-storage.js')vm.runInContext(fs.readFileSync(match[1],'utf8'),ctx);
+const run=s=>vm.runInContext(s,ctx),$=s=>w.document.querySelector(s);
+const closeWindow=w.close.bind(w);w.close=()=>{w.document.querySelectorAll('#listening-create').forEach(el=>el.dispatchEvent(new w.Event('close')));w.BookUI?.disposeSelects?.();closeWindow();};
+
+(async()=>{try{
+ const tick=()=>new Promise(r=>setTimeout(r,0));
+ const selectSchool=name=>{$('#school-search').value=name;$('#school-search').dispatchEvent(new w.Event('input'));$('[data-school-add]').click()};
+ run("page='books';activeBook='';bookType='听力书籍';render();generateSchoolBook('BK-SOURCE-686')");await tick();assert.equal($('#generate-school-form'),null);assert.equal($('[data-generate-school-book="BK-SOURCE-686"]'),null);
+ run("page='books';activeBook='';bookType='听力书籍';render();data.books.find(b=>b.id==='BK-SOURCE-686').workflow={...bookFlow(data.books.find(b=>b.id==='BK-SOURCE-686')),published:{at:new Date().toISOString(),withAnalysis:false}};generateSchoolBook('BK-SOURCE-686')");await tick();
+ for(const selector of ['#school-generation-summary','#school-content-count','#school-content-search','.school-tree-tools','.school-tree-hint','.school-generation-info h3','#dialog .editor-operation-meta'])assert.equal($(selector),null,selector);
+ assert.equal($('#school-selected-list').textContent,'');assert.equal($('#school-search-results').hidden,true);assert.equal($('[data-school-add]'),null);
+ assert.equal(w.document.querySelectorAll('[data-school-kind]').length,3);assert.equal($('[data-school-kind=papers]'),null);
+ assert.equal($('#school-tree>section>ul>li>.school-tree-row button').getAttribute('aria-expanded'),'true');
+ const second=$('#school-tree>section>ul>li>ul>li>.school-tree-row button');assert.equal(second.getAttribute('aria-expanded'),'false');second.click();assert.equal($('#school-tree>section>ul>li>ul>li>.school-tree-row button').getAttribute('aria-expanded'),'true');assert.ok($('.school-tree-toggle svg'));
+ selectSchool('杭州市第一中学');selectSchool('杭州市第二中学');assert.equal(w.document.querySelectorAll('[data-school-remove]').length,2);assert.equal($('#school-generate-submit').textContent,'确认生成');
+ const f=$('#generate-school-form');f.elements.name.value='多校共用一本测试';const before=run('data.books.length'),source=run("JSON.stringify(data.books.find(b=>b.id==='BK-SOURCE-686').directoryRoots)");
+ f.dispatchEvent(new w.Event('submit',{cancelable:true,bubbles:true}));assert.equal(run('data.books.length'),before+1);
+ assert.deepEqual(JSON.parse(run("JSON.stringify(data.books.find(b=>b.name==='多校共用一本测试').schoolNames)")),['杭州市第一中学','杭州市第二中学']);
+ assert.equal(run("JSON.stringify(data.books.find(b=>b.id==='BK-SOURCE-686').directoryRoots)"),source);
+ assert.notEqual(run("data.books.find(b=>b.name==='多校共用一本测试').directoryRoots[0].contentId"),run("data.books.find(b=>b.id==='BK-SOURCE-686').directoryRoots[0].contentId"));
+ run("generateSchoolBook('BK-SOURCE-686')");selectSchool('杭州市第一中学');$('#generate-school-form').elements.name.value='多校共用一本测试';$('#generate-school-form').dispatchEvent(new w.Event('submit',{cancelable:true,bubbles:true}));assert.match($('#generate-school-error').textContent,/已有同名/);assert.equal(run('data.books.length'),before+1);
+ run("closeDialog();var sourceForKinds=data.books.find(b=>b.id==='BK-SOURCE-686');var contentForKinds=data.directoryContents[sourceForKinds.directoryRoots[0].contentId];contentForKinds.items.push({kind:'papers',id:'paper-test'},{kind:'wordlists',id:'word-test'},{kind:'practices',id:'practice-test'});generateSchoolBook(sourceForKinds.id)");
+ const boxes=()=>[...w.document.querySelectorAll('.school-tree-leaf input')];assert.ok($('[data-school-kind=suites]').checked);$('[data-school-kind=suites]').click();assert.ok(!$('[data-school-kind=suites]').checked);assert.ok($('[data-school-kind=wordlists]').checked);assert.ok($('[data-school-kind=practices]').checked);
+ const paperRow=[...w.document.querySelectorAll('.school-tree-leaf')].find(x=>x.textContent.includes('paper-test'));assert.ok(!paperRow.querySelector('input').checked);assert.match(paperRow.textContent,/听力套题/);
+ $('[data-school-kind=wordlists]').click();$('[data-school-kind=practices]').click();assert.ok(boxes().every(b=>!b.checked));selectSchool('温州市中学');$('#generate-school-form').dispatchEvent(new w.Event('submit',{cancelable:true,bubbles:true}));assert.match($('#generate-school-error').textContent,/至少选择/);
+ run("closeDialog();generateSchoolBook('BK-SOURCE-686')");selectSchool('温州市中学');const beforeDown=run('data.books.length');run("data.books.find(b=>b.id==='BK-SOURCE-686').workflow.published=null");$('#generate-school-form').dispatchEvent(new w.Event('submit',{cancelable:true,bubbles:true}));assert.match($('#generate-school-error').textContent,/未发布/);assert.equal(run('data.books.length'),beforeDown);run("closeDialog();render()");await tick();assert.equal($('[data-generate-school-book="BK-SOURCE-686"]'),null);
+ run('closeDialog();editMember(data.members[0].id)');await tick();assert.ok($('#dialog .editor-operation-meta'));
+ console.log('PASS simplified controls, second-level collapse, multiselect types, paper grouping, one book for multiple schools, duplicate protection and audit isolation');
+}finally{w.close()}})().catch(e=>{console.error(e);process.exitCode=1});

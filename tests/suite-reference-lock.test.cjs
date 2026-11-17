@@ -1,0 +1,33 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const {JSDOM}=require('jsdom');
+const html=fs.readFileSync('index.html','utf8');
+const dom=new JSDOM(html.replace(/<script[^>]*>[\s\S]*?<\/script>/g,''),{url:'https://test.invalid',runScripts:'outside-only',pretendToBeVisual:true});
+const w=dom.window;w.structuredClone=structuredClone;w.matchMedia=()=>({matches:false,addListener(){},removeListener(){},addEventListener(){},removeEventListener(){}});w.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};w.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open')};w.HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','')};const nativeStyle=w.getComputedStyle.bind(w);w.getComputedStyle=el=>nativeStyle(el);
+w.HTMLMediaElement.prototype.pause=function(){};
+const ctx=dom.getInternalVMContext();
+vm.runInContext(html.match(/<script>([\s\S]*?)<\/script>/)[1],ctx);
+for(const match of html.matchAll(/<script src="([^"]+)"/g))if(match[1]!=='app-storage.js')vm.runInContext(fs.readFileSync(match[1],'utf8'),ctx);
+const run=s=>vm.runInContext(s,ctx),$=s=>w.document.querySelector(s);
+const closeWindow=w.close.bind(w);w.close=()=>{w.document.querySelectorAll('#listening-create').forEach(el=>el.dispatchEvent(new w.Event('close')));w.BookUI?.disposeSelects?.();closeWindow();};
+
+w.confirm=()=>true;w.URL.revokeObjectURL=()=>{};w.scrollTo=()=>{};
+(async()=>{try {
+run("data.books.find(b=>b.id===data.gaokaoBookId).workflow={stage:'解析编写中',steps:['终审'],round:0,reviews:{},history:[]};var sid=bankData().papers[Object.keys(bankData().papers).find(id=>bankData().papers[id].listeningSuiteId)].listeningSuiteId;openWholeSuiteEditor({id:sid})");
+await new Promise(r=>setTimeout(r,200));
+assert.ok($('#lc-save-progress'));
+for(const selector of ['[data-add-recording]','[data-reference-recording]','[data-unlink-recording]','[data-add-question]','[data-delete-question]'])assert.equal($(selector),null,selector);
+$('#lc-close').click();
+run("var freeId=nextBusinessId('suites');resourceStore().suites[freeId]={id:freeId,name:'free suite',materialIds:[]};openWholeSuiteEditor({id:freeId})");
+await new Promise(r=>setTimeout(r,100));
+assert.ok($('[data-add-recording]'));assert.ok($('[data-reference-recording]'));
+run("bankData().papers['lock-test']={id:'lock-test',listeningSuiteId:freeId,materialIds:[]}");
+$('[data-add-recording]').click();assert.equal($('.lc-batch-overlay'),null);
+$('[data-reference-recording]').click();assert.equal($('#dialog').open,false);
+run("var gaokao=data.books.find(b=>b.id===data.gaokaoBookId);gaokao.workflow.stage='编书中'");
+assert.equal(run('suiteStructureEditable(sid)'),true);
+run("var second={id:'stage-test-book',name:'阶段测试',bookType:'听力书籍',directoryNodes:[{id:'stage-suite',kind:'套题',sourceSuiteId:sid}],workflow:{stage:'审核中',steps:['终审'],round:0,reviews:{},history:[]}};data.books.push(second)");
+assert.equal(run('suiteStructureEditable(sid)'),false);
+run("second.workflow.stage='编书中'");assert.equal(run('suiteStructureEditable(sid)'),true);
+run("second.workflow.published={suites:[{id:sid}]}");assert.equal(run('suiteStructureEditable(sid)'),false);
+console.log('PASS stage-based shared suite lock and published snapshot protection; referenced suite editor hides recording/question additions and removals; unreferenced editor permits additions');
+}finally{w.close()}})().catch(e=>{console.error(e);process.exitCode=1});

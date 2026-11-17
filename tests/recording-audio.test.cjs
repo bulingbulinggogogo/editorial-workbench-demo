@@ -1,0 +1,15 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const ctx=vm.createContext({structuredClone,crypto:require('node:crypto').webcrypto,window:{addEventListener(){}},$:()=>({onclick(){}})});
+vm.runInContext(fs.readFileSync('book-690.js','utf8')+fs.readFileSync('suite-editor.js','utf8')+'\n'+fs.readFileSync('book-directory.js','utf8')+'\n'+fs.readFileSync('book-blocks.js','utf8')+fs.readFileSync('recording-audio.js','utf8'),ctx);
+assert.equal(ctx.segmentTime('01:02.345'),62.345);assert.equal(ctx.formatSegmentTime(62.345),'01:02.345');
+assert.ok(Number.isNaN(ctx.segmentTime('00:75.000')));
+assert.throws(()=>ctx.validateScriptSegments([{text:'hi',start:'00:02.000',end:'00:01.000'}]),/结束时间/);
+assert.throws(()=>ctx.validateScriptSegments([{text:'hi',start:'00:02.000',end:''}]),/同时/);
+const segment={id:'s1',speaker:'M',text:'Hello world. Goodbye.',translation:'你好世界。再见。',start:'00:01.000',end:'00:05.000'};
+const result=ctx.splitRecordingSegment(segment,12,5,'00:03.000');
+assert.equal(result.length,2);assert.equal(result[0].id,'s1');assert.notEqual(result[1].id,'s1');assert.equal(result[0].end,result[1].start);assert.equal(result[0].text,'Hello world.');assert.equal(result[1].text,'Goodbye.');assert.equal(result[0].translation,'你好世界。');assert.equal(result[1].translation,'再见。');
+ctx.validateScriptSegments(result);assert.throws(()=>ctx.splitRecordingSegment(segment,0,5,'00:03.000'),/光标/);assert.throws(()=>ctx.splitRecordingSegment(segment,12,0,'00:03.000'),/翻译/);assert.throws(()=>ctx.splitRecordingSegment(segment,12,5,'00:06.000'),/之间/);
+const untimed=ctx.splitRecordingSegment({...segment,start:'',end:''},12,5,'');assert.equal(untimed[0].end,'');
+const rows=vm.runInContext("suiteContent({sourceBookId:'690'},{id:'suite-14255',sourceSuiteId:'14255'}).scripts[0].segments",ctx);assert.equal(rows.length,2);assert.equal(rows[0].start,'00:00.110');assert.equal(rows[0].speaker,'W');
+const legacy=ctx.scriptSegments({id:'214274',text:'Edited English',translation:'修改过的翻译'},{sourceBookId:'690'});assert.equal(legacy.length,1);assert.equal(legacy[0].text,'Edited English');assert.equal(legacy[0].translation,'修改过的翻译');assert.equal(legacy[0].start,'');
+console.log('PASS: source sentence pairing, legacy edits preserved, timestamp validation, text/translation/time splitting');

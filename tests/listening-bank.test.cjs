@@ -1,0 +1,70 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const setup=fs.readFileSync('tests/workspace.test.cjs','utf8').split('\n').slice(0,7).join('\n');
+new Function('require',setup+`
+for(const f of ['book-690.js','book-content.js','suite-editor.js','recording-audio.js','book-blocks.js'])vm.runInContext(fs.readFileSync(f,'utf8'),ctx);
+const before=run("JSON.stringify(bookDirectoryNodes(data.books.find(b=>b.sourceBookId==='690')))");
+run("data.books.find(b=>b.sourceBookId==='690').suiteContent={'suite-14258':localSuiteContent(data.books.find(b=>b.sourceBookId==='690'),{id:'suite-14258',sourceSuiteId:'14258'})};data.books.find(b=>b.sourceBookId==='690').suiteContent['suite-14258'].questions[0].text='已有编辑保留';");
+vm.runInContext(fs.readFileSync('listening-bank.js','utf8'),ctx);
+assert.equal(run("Object.keys(bankData().materials).length"),30);
+assert.equal(run("Object.keys(bankData().questions).length"),60);
+assert.equal(run("[...Object.values(bankData().materials),...Object.values(bankData().questions)].reduce((n,item)=>n+(item.sourceAnalysis||[]).length,0)"),run("builtinBook690.analyses.filter(a=>String(a['旧单元id'])==='19391').length"));
+
+assert.equal(run("Object.keys(data.books.find(b=>b.sourceBookId==='690').listeningRefs).length"),3);
+assert.equal(run("JSON.stringify(bookDirectoryNodes(data.books.find(b=>b.sourceBookId==='690')))"),before);
+assert.equal(run("migrateListening690(data)"),false);
+assert.ok(run("Object.values(bankData().questions).some(q=>q.text==='已有编辑保留')"));
+assert.ok(run("Object.values(bankData().questions).every(q=>q.number===undefined)"));
+run("activeBook=data.books.find(b=>b.sourceBookId==='690').id;page='listening-bank';renderListeningBank()");
+assert.equal(node('#bank-count').textContent,'60 道小题');
+assert.ok(!node('#page').innerHTML.includes('套题</button>'));
+assert.ok(node('#bank-list').innerHTML.includes('data-bank-open'));
+run("const bankBook=data.books.find(b=>b.id===activeBook);const first=rawSuiteContent(bankBook,{id:'suite-14258',sourceSuiteId:'14258'}).questions[0];bankData().questions[first.id].analysisText='共用解析';bankData().questions[first.id].text='题库修改';");
+assert.equal(run("rawSuiteContent(bankBook,{id:'suite-14258',sourceSuiteId:'14258'}).questions[0].analysisText"),'共用解析');
+assert.equal(run("rawSuiteContent(bankBook,{id:'suite-14258',sourceSuiteId:'14258'}).questions[0].text"),'题库修改');
+assert.equal(run("rawSuiteContent(bankBook,{id:'suite-14258',sourceSuiteId:'14258'}).questions[0].number"),'1');
+run("const changed=rawSuiteContent(bankBook,{id:'suite-14258',sourceSuiteId:'14258'});changed.questions[0].text='书中修改';syncSuiteToBank(data,bankBook,{id:'suite-14258'},changed)");
+assert.equal(run("bankData().questions[first.id].text"),'书中修改');
+run("renderBookSharedAnalyses(bankBook,nodeTarget={innerHTML:'',querySelectorAll(){return []}})");
+assert.ok(run("nodeTarget.innerHTML.includes('共用解析')"));
+assert.ok(!run("nodeTarget.innerHTML.includes('data-bank-edit-question')"));
+assert.ok(run("bankUsage(Object.keys(bankData().materials)[0]).length===1"));
+run("const sharedCopy=structuredClone(bankBook.suiteContent['suite-14258']);data.books.push({id:'other-book',name:'共用书',directoryNodes:[{id:'copy-suite',name:'同一套',parentId:'',kind:'套题'}],suiteContent:{'copy-suite':sharedCopy}})");
+assert.equal(run("rawSuiteContent(data.books.find(b=>b.id==='other-book'),{id:'copy-suite'}).questions[0].analysisText"),'共用解析');
+assert.equal(run("bankUsage(Object.keys(bankData().materials)[0]).length"),2);
+
+const payload=run("serializeAppData(data)");ctx.reloaded=JSON.parse(payload);run('hydrateBuiltin690(reloaded)');
+assert.equal(run("Object.keys(reloaded.listeningBank.questions).length"),60);
+assert.equal(run("migrateListening690(reloaded)"),false);
+assert.equal(run("Object.values(reloaded.listeningBank.questions).find(q=>q.analysisText==='共用解析').text"),'书中修改');
+// Exact question usage rather than all references of its recording.
+run("const referenceFixture=structuredClone(data);const copyBook=referenceFixture.books.find(b=>b.id==='other-book');const deletedId=copyBook.suiteContent['copy-suite'].questions[0].id;const keptId=copyBook.suiteContent['copy-suite'].questions[1].id;removeBankQuestion(referenceFixture,deletedId)");
+assert.equal(run("referenceFixture.listeningBank.questions[deletedId]"),undefined);
+assert.equal(run("bankReferenceIndex(referenceFixture)[deletedId]"),undefined);
+assert.ok(run("referenceFixture.listeningBank.questions[keptId]"));
+assert.ok(run("bankReferenceIndex(referenceFixture)[keptId].length>=2"));
+run("bankSearch=Object.values(bankData().questions)[0].options[0].text;bankReferences=bankReferenceIndex()");
+assert.ok(run("bankFilteredQuestions().length>0"));
+run("bankSearch='';bankBookFilter='other-book'");
+assert.equal(run("bankFilteredQuestions().length"),20);
+run("bankBookFilter=''");
+// Recover an old zero-record import without rebuilding the user's directory.
+run("const recovery=structuredClone(data);const recoveryBook=recovery.books.find(b=>b.sourceBookId==='690');recoveryBook.directoryNodes=[];delete recoveryBook.suiteContent;delete recoveryBook.contentBlocks;recoveryBook.listeningRefs={};recovery.listeningBank={materials:{},questions:{},imports:{b1u1b1u2:{materials:0,questions:0}}};migrateListening690(recovery)");
+assert.equal(run("Object.keys(recovery.listeningBank.materials).length"),30);
+assert.equal(run("Object.keys(recovery.listeningBank.questions).length"),60);
+assert.equal(run("JSON.stringify(recoveryBook.directoryNodes)"),'[]');
+assert.equal(run("Object.keys(recoveryBook.listeningRefs).length"),0);
+assert.equal(run("migrateListening690(recovery)"),false);
+run("recovery.listeningBank.imports.b1u1b1u2.version=1;Object.values(recovery.listeningBank.questions)[0].analysisText='保留题库解析';migrateListening690(recovery)");
+assert.equal(run("Object.values(recovery.listeningBank.questions)[0].analysisText"),'保留题库解析');
+// Storage failures must not turn a successful import into an empty page.
+const originalSet=ctx.localStorage.setItem;
+ctx.localStorage.setItem=()=>{const error=new Error('full');error.name='QuotaExceededError';throw error};
+run("data=structuredClone(recovery);delete data.listeningBank;ensureListeningBankImport()");
+assert.equal(run("Object.keys(bankData().questions).length"),60);
+assert.equal(run("bankImportPending"),true);
+ctx.localStorage.setItem=originalSet;
+run("ensureListeningBankImport()");
+assert.equal(run("bankImportPending"),false);
+assert.equal(run("bankImportError"),'');
+console.log('PASS: 3 suites, 30 recordings, 60 questions; IDs/order and edits retained; shared analysis, bidirectional edits, idempotence and reload');
+`)(require);

@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const data={systemVersions:[]},ctx=vm.createContext({data,crypto:require('crypto').webcrypto});vm.runInContext(fs.readFileSync('system-versions.js','utf8'),ctx);
+let rows=ctx.allSystemVersions();assert.equal(rows.length,2);assert.equal(rows[0].number,'V0.0.28');assert.equal(rows[1].client,'crm');assert.equal(ctx.systemVersionTime(rows[0].updatedAt),'2026-10-10');
+assert.throws(()=>ctx.createSystemVersion('0.0.28','更新','user',rows,new Date(),'teacher'),/已存在/);
+const version=ctx.createSystemVersion('0.0.28','更新','user',rows,new Date(),'crm');assert.equal(version.client,'crm');
+assert.throws(()=>ctx.createSystemVersion('1','更新','user',rows,new Date(),''),/所属端/);
+data.systemVersions.push({...rows[0],content:'saved value'});assert.equal(ctx.allSystemVersions().length,2);assert.equal(ctx.allSystemVersions()[0].content,'saved value');
+data.systemVersions.push({id:'legacy',number:'1.0',content:'legacy',updatedAt:'2026-10-01'});assert.equal(ctx.allSystemVersions().length,3);
+vm.runInContext("systemVersionClient='teacher'",ctx);assert.equal(ctx.systemVersionRows().length,1);
+vm.runInContext("systemVersionClient='crm'",ctx);assert.equal(ctx.systemVersionRows()[0].number,'V0.0.11');
+console.log('PASS: built-in releases, separate clients, per-client duplicates, date-only display, saved records retained and filtering');

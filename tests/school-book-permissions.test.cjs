@@ -1,0 +1,24 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const {JSDOM}=require('jsdom');
+const html=fs.readFileSync('index.html','utf8');
+const dom=new JSDOM(html.replace(/<script[^>]*>[\s\S]*?<\/script>/g,''),{url:'https://test.invalid',runScripts:'outside-only',pretendToBeVisual:true});
+const w=dom.window;w.structuredClone=structuredClone;w.matchMedia=()=>({matches:false,addListener(){},removeListener(){},addEventListener(){},removeEventListener(){}});w.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};w.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open')};w.HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','')};const nativeStyle=w.getComputedStyle.bind(w);w.getComputedStyle=el=>nativeStyle(el);
+w.HTMLMediaElement.prototype.pause=function(){};
+const ctx=dom.getInternalVMContext();
+vm.runInContext(html.match(/<script>([\s\S]*?)<\/script>/)[1],ctx);
+for(const match of html.matchAll(/<script src="([^"]+)"/g))if(match[1]!=='app-storage.js')vm.runInContext(fs.readFileSync(match[1],'utf8'),ctx);
+const run=s=>vm.runInContext(s,ctx),$=s=>w.document.querySelector(s);
+const closeWindow=w.close.bind(w);w.close=()=>{w.document.querySelectorAll('#listening-create').forEach(el=>el.dispatchEvent(new w.Event('close')));w.BookUI?.disposeSelects?.();closeWindow();};
+
+
+(async()=>{try{
+const tick=()=>new Promise(r=>setTimeout(r,0));w.URL.revokeObjectURL=()=>{};
+run("data.books.find(b=>b.id==='BK-SOURCE-686').workflow={...bookFlow(data.books.find(b=>b.id==='BK-SOURCE-686')),published:{at:new Date().toISOString(),withAnalysis:false}};generateSchoolBook('BK-SOURCE-686')");$('#school-search').value='杭州市第一中学';$('#school-search').dispatchEvent(new w.Event('input'));$('[data-school-add]').click();$('#generate-school-form').elements.name.value='校本权限测试';$('#generate-school-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await tick();
+const id=run("data.books.find(b=>b.name==='校本权限测试').id");
+assert.equal([...w.document.querySelectorAll('th')].some(x=>x.textContent==='编稿状态'),false);assert.ok([...w.document.querySelectorAll('th')].some(x=>x.textContent==='来源书籍 ID'));assert.ok($('.book-source-id'));assert.equal($('.book-source-id').textContent,'686');assert.ok(![...w.document.querySelectorAll('th')].some(x=>['版本','教材版本'].includes(x.textContent)));assert.ok([...w.document.querySelectorAll('th')].some(x=>x.textContent==='来源发布状态'));assert.ok([...w.document.querySelectorAll('th')].some(x=>x.textContent==='校本发布状态'));$('.book-source-id').dispatchEvent(new w.FocusEvent('focusin',{bubbles:true}));await new Promise(r=>setTimeout(r,200));assert.ok($('.book-source-popover').textContent.includes('高中英语听力专项训练'));assert.ok($('.book-source-popover').textContent.includes('教材版本'));
+$('[data-school-scope="'+id+'"]').click();await tick();assert.equal($('#dialog-title').textContent,'可用范围');assert.equal($('[data-scope-add]'),null);$('#school-scope-search').value='杭州市第二中学';$('#school-scope-search').dispatchEvent(new w.Event('input'));$('[data-scope-add]').click();$('#school-scope-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await tick();assert.equal(run("data.books.find(b=>b.id==='"+id+"').schoolNames.length"),2);
+$('[data-open-book="'+id+'"]').click();await tick();assert.equal($('[data-book-section="解析编写"]'),null);$('[data-book-section="状态维护"]').click();await tick();assert.equal($('.book-stage-flow'),null);assert.ok($('.school-publication-panel'));assert.equal($('.editor-page-footer'),null);assert.ok(!$('.school-publication-panel').textContent.includes('发布时状态'));assert.ok($('[data-book-flow=publish]'));assert.equal(run("bookTransition(data.books.find(b=>b.id==='"+id+"'),'finish')"),false);
+$('[data-book-section="目录与内容"]').click();await tick();assert.equal($('.directory-insert-gap'),null);assert.equal($('.directory-rename-button'),null);assert.equal($('.content-row-actions [data-resource-action=edit]'),null);assert.ok($('.content-row-actions [data-resource-action=view]'));assert.ok($('.content-row-actions [data-resource-action=delete-row]'));assert.ok($('[data-directory-row] .directory-sort-handle'));
+const suiteRow=[...w.document.querySelectorAll('.unified-content-row')].find(row=>row.querySelector('.chapter-resource-meta').textContent.includes('听力套题'));assert.ok(suiteRow);suiteRow.querySelector('[data-resource-action=view]').click();await tick();assert.ok($('#listening-create'));assert.equal($('#lc-save-progress'),null);assert.equal($('[data-add-recording]'),null);$('#lc-close').click();await tick();
+console.log('PASS school source column, no manuscript/review tab, scope save, directory permissions and readonly content');
+}finally{w.close()}})().catch(e=>{console.error(e);process.exitCode=1});

@@ -1,0 +1,24 @@
+const fs=require('fs');
+const setup=fs.readFileSync('tests/workspace.test.cjs','utf8').split('\n').slice(0,7).join('\n');
+new Function('require',setup+`
+for(const f of ['book-690.js','book-content.js','suite-editor.js','recording-audio.js','book-blocks.js','listening-bank.js'])vm.runInContext(fs.readFileSync(f,'utf8'),ctx);
+const payload=run('serializeAppData(data)'),packed=run('packAppData(serializeAppData(data))');
+assert.deepEqual(JSON.parse(JSON.stringify(run('parseAppData(packAppData(serializeAppData(data)))'))),JSON.parse(payload));
+assert.ok(packed.length<payload.length/2);
+const cap=Math.floor(payload.length/2),prior=ctx.localStorage.setItem;
+ctx.localStorage.setItem=(key,value)=>{if(value.length>cap){const e=new Error('quota');e.name='QuotaExceededError';throw e}prior(key,value)};
+run('persistAppData(data)');
+assert.equal(JSON.parse(storage.get(run('KEY'))).storageEncoding,'lzw-v1');
+run('const restored=parseAppData(localStorage.getItem(KEY));hydrateBuiltin690(restored)');
+assert.equal(run('Object.keys(restored.listeningBank.questions).length'),60);
+assert.equal(run('Object.keys(restored.listeningBank.materials).length'),30);
+assert.equal(run('migrateListening690(restored)'),false);
+run("commitWorkspace(d=>{Object.values(d.listeningBank.questions)[0].analysisText='压缩后的编辑仍可保存'})");
+assert.ok(run("Object.values(parseAppData(localStorage.getItem(KEY)).listeningBank.questions).some(q=>q.analysisText==='压缩后的编辑仍可保存')"));
+ctx.localStorage.setItem=()=>{const e=new Error('blocked');e.name='SecurityError';throw e};
+assert.throws(()=>run('persistAppData(data)'),{name:'SecurityError'});
+ctx.localStorage.setItem=prior;
+const random=require('node:crypto').randomBytes(120000).toString('base64');ctx.codecFixture={text:random+'中文😀\\n\\u0000',empty:'',nested:[1,null,true]};
+assert.equal(run('JSON.stringify(parseAppData(packAppData(JSON.stringify(codecFixture))))'),JSON.stringify(ctx.codecFixture));
+console.log('PASS: quota fallback, imported-data round trip, edits/reload, dictionary saturation, permission failures; chars '+payload.length+' -> '+packed.length);
+`)(require);

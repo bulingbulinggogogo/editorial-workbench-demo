@@ -1,0 +1,51 @@
+const fs=require('fs');
+const setup=fs.readFileSync('tests/listening-bank-dom.test.cjs','utf8').split('(async()=>{')[0];
+new Function('require',setup+String.raw`
+(async()=>{
+w.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open');this.dispatchEvent(new w.Event('close'))};w.confirm=()=>true;
+w.URL.createObjectURL=()=> 'blob:fixture/'+Math.random();w.URL.revokeObjectURL=()=>{};
+w.AudioContext=class{async decodeAudioData(){return {duration:11.35,getChannelData:()=>new Float32Array(1000)}}async close(){}};
+w.HTMLCanvasElement.prototype.getContext=()=>({setTransform(){},clearRect(){},fillRect(){}});w.HTMLMediaElement.prototype.play=()=>Promise.resolve();
+run('const batchTestFiles=new Map();audioFileStore=async(id,file)=>{if(file)batchTestFiles.set(id,file);return batchTestFiles.get(id)}');
+const wait=()=>new Promise(r=>setTimeout(r,80));let aligns=0;
+w.fetch=async url=>url.endsWith('/health')?{ok:true,json:async()=>({token:'fixture'})}:{ok:true,json:async()=>{aligns++;return {segments:[{start:0,end:1},{start:1,end:2},{start:2,end:4},{start:4,end:6},{start:6,end:7},{start:7,end:11}]}}};
+run("page='listening-bank';renderListeningBank()");$('#bank-batch-add').click();w.Blob.prototype.arrayBuffer=async()=>new ArrayBuffer(4);
+assert.ok($('#lc-batch-raw').value.includes('Where is the woman going?'));assert.ok($('.lc-file-list').textContent.includes('library.aac'));
+const raw=run('listeningDemo.raw').replaceAll('题型：长对话','题型：长对话\n能力：能力1');
+$('#lc-batch-raw').value=['library.aac','shopping.aac','weekend.aac'].map((name,i)=>'录音稿 '+(i+1)+'\n音频文件名：'+name+'\n'+raw).join('\n');
+assert.equal($('#lc-batch-files'),null);assert.equal($('#lc-batch-draft'),null);assert.equal($('#lc-batch-recognize'),null);$('#lc-step3').click();assert.ok($('#lc-step1').classList.contains('active'));
+let unexpectedNetwork=0;w.fetch=async()=>{unexpectedNetwork++;throw Error('demo must stay offline')};$('#lc-batch-folder').click();await wait();$('#lc-next').click();await wait();
+assert.equal(w.document.querySelectorAll('.lc-batch-records [role=tab]').length,3);assert.equal($('.lc-batch-toolbar'),null);assert.equal($('.lc-batch-records small'),null);assert.equal($('#lc-batch-raw'),null);assert.ok($('#lc-step2').classList.contains('active'));assert.ok($('.lc-batch-output [data-question]'));
+const analysisRow=$('.lc-question-card .lc-analysis-row');assert.ok(analysisRow.querySelector('[data-qfield="analysisText"]'));assert.equal(analysisRow.querySelector('td').colSpan,2);assert.equal(analysisRow.querySelector('[data-set-answer]'),null);assert.equal($('.lc-question-card>.lc-analysis'),null);
+const firstTab=$('[data-batch-record="0"]');firstTab.dispatchEvent(new w.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));assert.equal($('[data-batch-record="1"]').getAttribute('aria-selected'),'true');
+assert.equal($('#lc-batch-audio-name'),null);
+const search=$('#lc-batch-audio-select');search.focus();search.value='week';search.dispatchEvent(new w.Event('input'));assert.equal(w.document.querySelectorAll('[data-audio-file]').length,1);$('[data-audio-file="2"]').click();await wait();assert.equal($('#lc-batch-audio-select').value,'weekend.aac');
+$('#lc-batch-audio-select').focus();$('#lc-batch-audio-select').value='shop';$('#lc-batch-audio-select').dispatchEvent(new w.Event('input'));$('[data-audio-file="1"]').click();await wait();
+assert.equal($('.lc-entry-tabs'),null);assert.equal($('[data-question="0"]').hidden,false);assert.equal($('[data-question="1"]').hidden,false);assert.ok($('.lc-batch-transcript-panel #lc-text'));assert.ok($('.lc-transcript-table td #lc-text'));assert.ok($('.lc-batch-transcript-panel #lc-batch-audio-select'));assert.ok($('.lc-question-heading .lc-tags'));
+
+$('#lc-batch-audio-select').focus();$('#lc-add-audio').click();await wait();assert.equal($('#lc-batch-audio-select').value,'新增音频1.aac');$('#lc-back').click();assert.ok($('#lc-batch-raw'));$('#lc-next').click();await wait();assert.equal($('#lc-batch-audio-select').value,'新增音频1.aac');
+$('#lc-next').click();await wait();assert.ok($('#lc-step3').classList.contains('active'));assert.equal(unexpectedNetwork,0);assert.equal(w.document.querySelectorAll('[data-sentence]').length,6);
+let plays=0;w.HTMLMediaElement.prototype.play=()=>{plays++;return Promise.resolve()};$('[data-sentence="1"] td').click();assert.ok($('[data-sentence="1"]').classList.contains('selected'));assert.equal(plays,0);assert.ok($('#lc-player').currentTime>0);$('[data-sentence="2"] [data-sfield=start]').focus();assert.ok($('[data-sentence="2"]').classList.contains('selected'));assert.equal(plays,0);
+$('[data-sfield=text]').value='Edited sentence';$('[data-batch-record="0"]').click();assert.notEqual($('[data-sfield=text]').value,'Edited sentence');$('[data-batch-record="1"]').click();assert.equal($('[data-sfield=text]').value,'Edited sentence');
+const beforeTime=$('[data-sfield=end]').value;$('#lc-back').click();$('#lc-next').click();await wait();assert.equal($('[data-sfield=text]').value,'Edited sentence');assert.equal($('[data-sfield=end]').value,beforeTime);
+$('#lc-next').click();assert.ok($('#lc-step4').classList.contains('active'));assert.equal($('#lc-save-progress'),null);assert.equal($('#lc-no-clue').checked,true);$('[data-mode-question][value=clue]').click();$('#lc-next').click();assert.ok($('#lc-step4').classList.contains('active'));
+assert.equal($('#lc-prev-question'),null);assert.equal($('.lc-clue-transcript .lc-clue-mode-field'),null);assert.equal(w.document.querySelectorAll('.lc-clue-card').length,2);assert.ok($('.lc-clue-card .lc-clue-mode-field'));assert.equal($('.lc-clue-tabs'),null);assert.equal($('.lc-clue-transcript>h3').textContent,'请标注小题1的线索句');
+for(let i=0;i<3;i++){$('[data-batch-record="'+i+'"]').click();$('#lc-no-clue').click();$('[data-clue-question="1"]').click();$('#lc-no-clue').click()}
+$('#lc-next').click();assert.ok($('#lc-step5').classList.contains('active'));$('[data-batch-record="1"]').click();
+assert.equal($('#lc-import-translations').parentElement,$('.lc-paste-translations'));assert.equal($('.lc-translation-layout>.lc-recognize-column'),null);$('#lc-translation-paste').value='[R01-S01] 第一篇译文\n[R02-S01] 第二篇译文';$('#lc-import-translations').click();assert.equal($('[data-translation-code="R02-S01"]').value,'第二篇译文');assert.equal($('[data-translation-code="R01-S01"]'),null);assert.equal($('[data-translation-filter]'),null);assert.ok($('.lc-translation-results .lc-batch-records'));$('[data-batch-record="0"]').click();assert.equal($('[data-translation-code="R01-S01"]').value,'第一篇译文');assert.deepEqual([...w.document.querySelectorAll('.lc-translation-groups>h3')].map(e=>e.textContent),['录音稿','小题 1','小题 2']);let copied='';Object.defineProperty(w.navigator,'clipboard',{configurable:true,value:{writeText:async t=>{copied=t}}});$('#lc-copy').click();await wait();for(const code of ['R01-S01','R02-S01','R03-S01','R03-Q02-C'])assert.ok(copied.includes('['+code+']'));
+assert.equal($('#lc-step6'),null);assert.equal($('#lc-next').textContent,'保存');
+$('#lc-next').click();await wait();assert.ok($('#listening-create'));assert.ok($('#lc-error').textContent.includes('翻译须全部留空或全部填齐'));for(let i=0;i<3;i++){$('[data-batch-record="'+i+'"]').click();w.document.querySelectorAll('[data-translation-code]').forEach(el=>{if(!el.value.trim())el.value='测试译文'})}
+const before=run('Object.keys(bankData().materials).length');$('#lc-next').click();await wait();assert.equal($('#listening-create'),null);assert.equal(run('Object.keys(bankData().materials).length'),before+3);assert.equal(unexpectedNetwork,0);assert.equal(run('Object.values(bankData().materials).filter(m=>m.segments?.some(s=>s.clozeBlanks?.length)).length'),0);
+// Continue an incomplete saved entry through the same workflow without duplicating it.
+const savedId=run('Object.values(bankData().materials).find(m=>m.segments?.length&&m.id.startsWith("REC-")).id');
+const savedQ=run('bankQuestions('+JSON.stringify(savedId)+')[0].id');
+assert.equal(run('bankQuestionProgress(bankData().questions['+JSON.stringify(savedQ)+']).complete'),false);
+const questionCount=run('Object.keys(bankData().questions).length');
+run('continueBankQuestion('+JSON.stringify(savedQ)+')');await wait();assert.equal($('#listening-create h2').textContent,'编辑听力题');assert.equal($('[data-edit-view=cloze]').getAttribute('aria-selected'),'true');$('[data-edit-view=content]').click();
+assert.ok($('#lc-upload'));assert.equal($('#lc-step1'),null);assert.equal(w.document.querySelectorAll('.lc-edit-tabs button').length,4);assert.equal($('.lc-batch-records'),null);assert.equal($('#lc-back'),null);$('[data-qfield="text"]').value='Updated existing question';$('#lc-save-progress').click();await wait();
+assert.ok($('#listening-create.lc-view-mode'));assert.equal($('.lc-footer'),null);$('#lc-close').click();assert.equal(run('bankData().questions['+JSON.stringify(savedQ)+'].text'),'Updated existing question');assert.equal(run('Object.keys(bankData().questions).length'),questionCount);assert.equal(run('Object.keys(bankData().materials).length'),before+3);
+run('openListeningCreate(true,{materialId:'+JSON.stringify(savedId)+',stage:6})');await wait();assert.equal($('[data-edit-view=cloze]').getAttribute('aria-selected'),'true');assert.equal($('.lc-cloze-word').getAttribute('aria-pressed'),'false');$('.lc-cloze-word').click();assert.equal($('.lc-cloze-word').getAttribute('aria-pressed'),'true');assert.equal($('[data-no-cloze]'),null);w.document.querySelectorAll('.lc-cloze-word.is-blank').forEach(b=>b.click());assert.equal($('.lc-cloze-word').getAttribute('aria-pressed'),'false');$('#lc-save-progress').click();await wait();assert.equal(run('bankData().materials['+JSON.stringify(savedId)+'].noCloze'),false);assert.equal(run('bankQuestionProgress(bankData().questions['+JSON.stringify(savedQ)+']).missing.some(x=>x.stage===6)'),true);
+run('bankMaterialId='+JSON.stringify(savedId)+';renderListeningBank()');assert.ok($('.bank-progress'));assert.ok($('.bank-cloze-preview'));assert.ok($('[data-bank-continue]'));
+console.log('PASS: folder-before-recognition guard, removed controls, keyboard tabs, matching correction, offline segmentation, reuse, isolated edits, global translations and grouped save');w.BookUI.disposeTable();dom.window.close();
+})().catch(e=>{console.error(e);dom.window.close();process.exitCode=1});
+`)(require);
