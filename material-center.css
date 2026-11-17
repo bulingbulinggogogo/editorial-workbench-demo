@@ -1,0 +1,13 @@
+.material-center .toolbar .search{width:100%;max-width:520px}
+.material-center table th,.material-center table td{padding:18px 22px;white-space:nowrap}
+.material-center table th:first-child,.material-center table td:first-child{padding-left:28px;width:32%}
+.material-center table td.material-center-name{white-space:normal;min-width:220px}
+.material-center-actions{width:200px}
+.material-center-actions .linkbtn{margin-right:14px}
+.material-center-actions .material-delete{color:#ff3030}
+.material-center-actions .material-delete:disabled{color:#b4c0d0;cursor:not-allowed}
+.material-center-preview{display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px 24px;text-align:center}
+.material-center-preview>.icon{width:48px;height:48px;color:#1677ff}
+
+.material-center .toolbar{gap:16px;flex-wrap:wrap}
+.material-center #material-center-type{min-width:170px}

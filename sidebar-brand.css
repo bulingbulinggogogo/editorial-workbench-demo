@@ -1,0 +1,4 @@
+#sidebar .brand .sidebar-brand-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;margin:0;padding:0;background:transparent;border:0;border-radius:50%;cursor:pointer;box-shadow:none}
+#sidebar .sidebar-brand-toggle img{display:block;width:44px;height:44px;object-fit:contain}
+#sidebar .sidebar-brand-toggle:focus-visible{outline:2px solid #1677ff;outline-offset:4px}
+#sidebar .nav .brand-hidden{display:none!important}
